@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spider-Man | Ultimate Interactive Experience</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ================= ROOT & RESET ================= */
+:root {
+    --red: #ff2b2b;
+    --dark: #05070c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #02030a, #000);
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+    color: #eee;
+    overflow-x: hidden;
+}
+
+/* ================= HERO / PARALLAX ================= */
+.hero {
+    height: 100vh;
+    perspective: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-inner {
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.1s linear;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--red);
+    text-shadow: 0 0 30px red;
+}
+
+.hero p {
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+/* ================= BUTTONS ================= */
+button {
+    margin-top: 20px;
+    background: var(--red);
+    border: none;
+    padding: 14px 20px;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e60000;
+}
+
+/* ================= SECTIONS ================= */
+section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+section h2 {
+    color: var(--red);
+    margin-bottom: 30px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+/* ================= CARDS ================= */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #0d0f1a;
+    border: 2px solid var(--red);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: all .7s ease;
+}
+
+.card.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ================= TRAILERS ================= */
+.trailer {
+    position: relative;
+    padding-top: 56.25%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.trailer iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= EXPANDABLE LIST ================= */
+.item {
+    background: #101225;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.item-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s ease;
+}
+
+.item.active .item-details {
+    max-height: 200px;
+    margin-top: 10px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    text-align: center;
+    padding: 30px;
+    opacity: .6;
+    font-size: .9rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 AUDIO -->
+<audio id="click" src="https://www.myinstants.com/media/sounds/click.mp3"></audio>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+    <div class="hero-inner" id="parallax">
+        <h1>🕷️ SPIDER-MAN</h1>
+        <p>The Ultimate Interactive Marvel Experience</p>
+        <button onclick="document.getElementById('trailers').scrollIntoView({behavior:'smooth'})">
+            🎬 Watch Trailers
+        </button>
+    </div>
+</div>
+
+<!-- ================= INFO ================= -->
+<section>
+<h2>🧬 Characters</h2>
+<div class="grid">
+    <div class="card reveal">
+        <img src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/005spider-man_lob_crd_03.jpg">
+        <h3>Spider-Man</h3>
+        <p>Enhanced strength, spider-sense, web technology.</p>
+    </div>
+
+    <div class="card reveal">
+        <img src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/peterparker.jpg">
+        <h3>Peter Parker</h3>
+        <p>Genius student balancing heroism & responsibility.</p>
+    </div>
+</div>
+</section>
+
+<!-- ================= TRAILERS ================= -->
+<section id="trailers">
+<h2>🎞️ Movie Trailers</h2>
+
+<div class="trailer reveal">
+<iframe src="https://www.youtube.com/embed/t06RUxPbp_c"
+        allowfullscreen></iframe>
+</div>
+
+<div class="trailer reveal">
+<iframe src="https://www.youtube.com/embed/JfVOs4VSpmA"
+        allowfullscreen></iframe>
+</div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section>
+<h2>📜 Timeline</h2>
+<div class="item reveal" onclick="toggle(this)">
+    1962 – Amazing Fantasy #15
+    <div class="item-details">Spider-Man’s first appearance.</div>
+</div>
+
+<div class="item reveal" onclick="toggle(this)">
+    2002 – First Live-Action Film
+    <div class="item-details">Tobey Maguire debuts as Spider-Man.</div>
+</div>
+
+<div class="item reveal" onclick="toggle(this)">
+    2021 – No Way Home
+    <div class="item-details">Multiverse crossover event.</div>
+</div>
+</section>
+
+<!-- ================= VILLAINS ================= -->
+<section>
+<h2>🦹 Villains</h2>
+
+<div class="item reveal" onclick="toggle(this)">
+    Green Goblin
+    <div class="item-details">Norman Osborn, Spider-Man’s arch-enemy.</div>
+</div>
+
+<div class="item reveal" onclick="toggle(this)">
+    Doctor Octopus
+    <div class="item-details">Genius scientist with mechanical arms.</div>
+</div>
+</section>
+
+<footer>
+© Marvel Characters used for educational/demo purposes
+</footer>
+
+<script>
+/* ================= 3D PARALLAX ================= */
+const hero = document.getElementById("parallax");
+document.addEventListener("mousemove", e => {
+    const x = (window.innerWidth / 2 - e.clientX) / 30;
+    const y = (window.innerHeight / 2 - e.clientY) / 30;
+    hero.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+
+/* ================= SCROLL ANIMATIONS ================= */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+/* ================= EXPAND ================= */
+function toggle(el) {
+    document.getElementById("click").play();
+    el.classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
